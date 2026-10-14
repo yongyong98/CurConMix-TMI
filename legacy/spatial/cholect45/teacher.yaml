@@ -1,0 +1,10 @@
+defaults:
+  - config
+  - _self_
+
+epochs: 20
+exp: CurConMix_B224_Teacher
+pretrained_ssl: true
+pretrained_exp: CurConMix_B224_Pretrain_2
+mixup: true
+alpha: 0.4

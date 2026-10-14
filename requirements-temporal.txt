@@ -1,0 +1,6 @@
+# Historical temporal reproduction environment (Python 3.9).
+# Install the appropriate PyTorch 2.0.1 build separately; see docs/installation.md.
+numpy==1.22.4
+pandas==1.4.4
+scikit-learn==1.5.0
+tqdm==4.67.1

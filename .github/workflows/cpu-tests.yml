@@ -1,0 +1,54 @@
+name: CPU tests
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.9'
+      - run: python -m pip install -r requirements-temporal.txt
+      - run: python -m pip install -e ".[dev]"
+      - run: python -m pytest -q
+      - run: python -m compileall -q src legacy tools tests
+      - run: curconmix --help
+      - run: curconmix-assets --list
+      - run: python -m curconmix_release.lls48 --help
+      - run: python -m curconmix_release.checkpoint --help
+      - run: python -m curconmix_release.spatial_checkpoint --help
+      - run: python -m curconmix_release.feature_export --help
+      - run: python -m curconmix_release.cache_prepare --help
+      - run: curconmix-assets --manifest manifests/spatial_assets.json --list
+      - run: git diff --check
+  spatial-environment:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.9'
+      - run: python -m pip install torch==2.0.1 torchvision==0.15.2 --index-url https://download.pytorch.org/whl/cpu
+      - run: python -m pip install -r requirements-spatial.txt
+      - run: python -m pip install -e ".[dev]" ruff==0.15.0
+      - run: python -m pip check
+      - name: Import model dependencies without constructing a model
+        run: python -c "import torch, torchvision, timm, albumentations, cv2, hydra, neptune; print(torch.__version__, timm.__version__, albumentations.__version__)"
+      - name: Compose stage settings without running training
+        run: |
+          python legacy/spatial/lls48/main.py --config-name pretrain --cfg job
+          python legacy/spatial/lls48/main.py --config-name teacher --cfg job
+          python legacy/spatial/lls48/main.py --config-name student --cfg job
+          python legacy/spatial/cholect45/main.py --config-name pretrain --cfg job
+          python legacy/spatial/cholect45/main.py --config-name teacher --cfg job
+          python legacy/spatial/cholect45/main.py --config-name student --cfg job
+      - name: Run synthetic contracts including restricted checkpoint serialization
+        run: python -m pytest -q
+      - run: python -m ruff check src legacy tools tests
+      - run: python -m compileall -q src legacy tools tests
+      - run: git diff --check

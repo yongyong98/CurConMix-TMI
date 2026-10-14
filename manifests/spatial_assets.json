@@ -1,0 +1,294 @@
+{
+  "schema_version": 2,
+  "assets": [
+    {
+      "id": "lls48-spatial-b224",
+      "kind": "spatial_checkpoint_bundle",
+      "dataset": "lls48",
+      "variant": "swinb224",
+      "architecture": "TripletModel",
+      "folds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "status": "published",
+      "available": true,
+      "license": "CC-BY-NC-4.0",
+      "license_status": "approved",
+      "release_tag": "spatial-encoders-v1.0.0",
+      "files": [
+        {
+          "id": "lls48-spatial-b224-fold0",
+          "filename": "lls48-spatial-b224-fold0.pth",
+          "format": "file",
+          "install_path": "lls48/b224/fold0.pth",
+          "fold": 0,
+          "url": "https://github.com/yongyong98/CurConMix-TMI/releases/download/spatial-encoders-v1.0.0/lls48-spatial-b224-fold0.pth",
+          "sha256": "974b272043261a2ec8b7635d04d12660f6c8af4c0d0079d2a711ea9cc73e47cb",
+          "size_bytes": 349785025,
+          "source_sha256": "ab45a00bc452b88ac85f31d84a4bac9af1ac585de795ecff5cd31758f252b2db",
+          "canonical_prediction_sha256": "39439124d70e723ca8e454e4e1f617a67a884d11ee206134aae93a14ad8e8c77",
+          "mapping_sha256": "927957a5942d62e18168cdf761013c08b4f361a537ad6cf20ebe8a7c7cdfe758"
+        },
+        {
+          "id": "lls48-spatial-b224-fold1",
+          "filename": "lls48-spatial-b224-fold1.pth",
+          "format": "file",
+          "install_path": "lls48/b224/fold1.pth",
+          "fold": 1,
+          "url": "https://github.com/yongyong98/CurConMix-TMI/releases/download/spatial-encoders-v1.0.0/lls48-spatial-b224-fold1.pth",
+          "sha256": "238b9ee8afece5efae133668bdb48e9d3b4b36f6189b3878c3738c13d783f7cc",
+          "size_bytes": 349785025,
+          "source_sha256": "064edf1ec8bfe1a444d9c25087c153369f68c0859951f1a6e1cb4a5247a8cb00",
+          "canonical_prediction_sha256": "39439124d70e723ca8e454e4e1f617a67a884d11ee206134aae93a14ad8e8c77",
+          "mapping_sha256": "927957a5942d62e18168cdf761013c08b4f361a537ad6cf20ebe8a7c7cdfe758"
+        },
+        {
+          "id": "lls48-spatial-b224-fold2",
+          "filename": "lls48-spatial-b224-fold2.pth",
+          "format": "file",
+          "install_path": "lls48/b224/fold2.pth",
+          "fold": 2,
+          "url": "https://github.com/yongyong98/CurConMix-TMI/releases/download/spatial-encoders-v1.0.0/lls48-spatial-b224-fold2.pth",
+          "sha256": "fcbc1dfc72b25fc33d42704ddca411424f9b2a78e3ebb3673c509a9d0ec32693",
+          "size_bytes": 349785025,
+          "source_sha256": "033df4ff96134d08a679b21cdf8a9418486a1c90901de4c51a711dc9be078c4a",
+          "canonical_prediction_sha256": "39439124d70e723ca8e454e4e1f617a67a884d11ee206134aae93a14ad8e8c77",
+          "mapping_sha256": "927957a5942d62e18168cdf761013c08b4f361a537ad6cf20ebe8a7c7cdfe758"
+        },
+        {
+          "id": "lls48-spatial-b224-fold3",
+          "filename": "lls48-spatial-b224-fold3.pth",
+          "format": "file",
+          "install_path": "lls48/b224/fold3.pth",
+          "fold": 3,
+          "url": "https://github.com/yongyong98/CurConMix-TMI/releases/download/spatial-encoders-v1.0.0/lls48-spatial-b224-fold3.pth",
+          "sha256": "eae689b9ec628426440240e458476af7384bbf59399dd678ae5b495cc6ba8a25",
+          "size_bytes": 349785025,
+          "source_sha256": "0e9046786d9c92182dfe1b9177b5ae331b2535d2f2e14161f22d1a64aaf7e6c3",
+          "canonical_prediction_sha256": "39439124d70e723ca8e454e4e1f617a67a884d11ee206134aae93a14ad8e8c77",
+          "mapping_sha256": "927957a5942d62e18168cdf761013c08b4f361a537ad6cf20ebe8a7c7cdfe758"
+        },
+        {
+          "id": "lls48-spatial-b224-fold4",
+          "filename": "lls48-spatial-b224-fold4.pth",
+          "format": "file",
+          "install_path": "lls48/b224/fold4.pth",
+          "fold": 4,
+          "url": "https://github.com/yongyong98/CurConMix-TMI/releases/download/spatial-encoders-v1.0.0/lls48-spatial-b224-fold4.pth",
+          "sha256": "de553b7c4401258e0616e5570359760b4267fb28ca8cbf3012b264f59d411509",
+          "size_bytes": 349785025,
+          "source_sha256": "99100ae7bc2a5b2eac67c3d73bcd465832bbef86d637b0499c8a46189d751756",
+          "canonical_prediction_sha256": "39439124d70e723ca8e454e4e1f617a67a884d11ee206134aae93a14ad8e8c77",
+          "mapping_sha256": "927957a5942d62e18168cdf761013c08b4f361a537ad6cf20ebe8a7c7cdfe758"
+        }
+      ],
+      "validation": {
+        "tensor_equality": "PASS",
+        "strict_model_load": "PASS",
+        "prediction_pairing": "EXACT_FLOAT32",
+        "source_preserved": true,
+        "export_sha256": "recomputed"
+      },
+      "release_note": "Five spatial student checkpoints with unchanged model tensors, strict architecture loading, and exact float32 pairing to stored canonical predictions. Export preparation performs no new inference. Matching feature extraction and MRTT inputs require separate qualification."
+    },
+    {
+      "id": "lls48-spatial-b384",
+      "kind": "spatial_checkpoint_bundle",
+      "dataset": "lls48",
+      "variant": "swinb384",
+      "architecture": "TripletModel",
+      "folds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "status": "published",
+      "available": true,
+      "license": "CC-BY-NC-4.0",
+      "license_status": "approved",
+      "release_tag": "spatial-encoders-v1.0.0",
+      "files": [
+        {
+          "id": "lls48-spatial-b384-fold0",
+          "filename": "lls48-spatial-b384-fold0.pth",
+          "format": "file",
+          "install_path": "lls48/b384/fold0.pth",
+          "fold": 0,
+          "url": "https://github.com/yongyong98/CurConMix-TMI/releases/download/spatial-encoders-v1.0.0/lls48-spatial-b384-fold0.pth",
+          "sha256": "9015f32fe4e8edce3a065ffc831dbfab4078fc5d8e06effe4fb2c0c73f1934ac",
+          "size_bytes": 362354625,
+          "source_sha256": "e9adf7875842fe724d48078f2d3b6f5d4ca62e386e7094fdda85ef38d1702539",
+          "canonical_prediction_sha256": "37b531ab5489a20a310d04e6384ffb8c187feb54932a1b3eae4eefd9f089070c",
+          "mapping_sha256": "927957a5942d62e18168cdf761013c08b4f361a537ad6cf20ebe8a7c7cdfe758"
+        },
+        {
+          "id": "lls48-spatial-b384-fold1",
+          "filename": "lls48-spatial-b384-fold1.pth",
+          "format": "file",
+          "install_path": "lls48/b384/fold1.pth",
+          "fold": 1,
+          "url": "https://github.com/yongyong98/CurConMix-TMI/releases/download/spatial-encoders-v1.0.0/lls48-spatial-b384-fold1.pth",
+          "sha256": "53643ebd34bfe6b19ef4eea140786c86c42a6c73731dff9a6f2977d2966272a3",
+          "size_bytes": 362354625,
+          "source_sha256": "972070a9c29402daf76f4d4216054e1e6a65a2b84aa5a44aa401db96644307dd",
+          "canonical_prediction_sha256": "37b531ab5489a20a310d04e6384ffb8c187feb54932a1b3eae4eefd9f089070c",
+          "mapping_sha256": "927957a5942d62e18168cdf761013c08b4f361a537ad6cf20ebe8a7c7cdfe758"
+        },
+        {
+          "id": "lls48-spatial-b384-fold2",
+          "filename": "lls48-spatial-b384-fold2.pth",
+          "format": "file",
+          "install_path": "lls48/b384/fold2.pth",
+          "fold": 2,
+          "url": "https://github.com/yongyong98/CurConMix-TMI/releases/download/spatial-encoders-v1.0.0/lls48-spatial-b384-fold2.pth",
+          "sha256": "fc34f34c519ed72276b9c3569b6d30d22e5af27cb5471fba6984e7cff47ffc03",
+          "size_bytes": 362354625,
+          "source_sha256": "36d4ebdd5b5bbba65069894b2c4f40a105572b605083044d5b0133a3c86f334e",
+          "canonical_prediction_sha256": "37b531ab5489a20a310d04e6384ffb8c187feb54932a1b3eae4eefd9f089070c",
+          "mapping_sha256": "927957a5942d62e18168cdf761013c08b4f361a537ad6cf20ebe8a7c7cdfe758"
+        },
+        {
+          "id": "lls48-spatial-b384-fold3",
+          "filename": "lls48-spatial-b384-fold3.pth",
+          "format": "file",
+          "install_path": "lls48/b384/fold3.pth",
+          "fold": 3,
+          "url": "https://github.com/yongyong98/CurConMix-TMI/releases/download/spatial-encoders-v1.0.0/lls48-spatial-b384-fold3.pth",
+          "sha256": "d58f4842d3698092a578652ad09c43a9e3810d8675de562091d17c103f6f3575",
+          "size_bytes": 362354625,
+          "source_sha256": "454e958e588aaddf2d9cfd99748429a7a49eae00554864c8fc4075d3bb87ee30",
+          "canonical_prediction_sha256": "37b531ab5489a20a310d04e6384ffb8c187feb54932a1b3eae4eefd9f089070c",
+          "mapping_sha256": "927957a5942d62e18168cdf761013c08b4f361a537ad6cf20ebe8a7c7cdfe758"
+        },
+        {
+          "id": "lls48-spatial-b384-fold4",
+          "filename": "lls48-spatial-b384-fold4.pth",
+          "format": "file",
+          "install_path": "lls48/b384/fold4.pth",
+          "fold": 4,
+          "url": "https://github.com/yongyong98/CurConMix-TMI/releases/download/spatial-encoders-v1.0.0/lls48-spatial-b384-fold4.pth",
+          "sha256": "30f29cd9b458d1e4ccce2df53a67f930c2d5fe49771a64cbada183329d9abb2d",
+          "size_bytes": 362354625,
+          "source_sha256": "b8751b908de378577f90ca9edc9b10fcbc5ac57a9e60b304684ec2490e7b1dd2",
+          "canonical_prediction_sha256": "37b531ab5489a20a310d04e6384ffb8c187feb54932a1b3eae4eefd9f089070c",
+          "mapping_sha256": "927957a5942d62e18168cdf761013c08b4f361a537ad6cf20ebe8a7c7cdfe758"
+        }
+      ],
+      "validation": {
+        "tensor_equality": "PASS",
+        "strict_model_load": "PASS",
+        "prediction_pairing": "EXACT_FLOAT32",
+        "source_preserved": true,
+        "export_sha256": "recomputed"
+      },
+      "release_note": "Five spatial student checkpoints with unchanged model tensors, strict architecture loading, and exact float32 pairing to stored canonical predictions. Export preparation performs no new inference. Matching feature extraction and MRTT inputs require separate qualification."
+    },
+    {
+      "id": "cholect45-spatial-l224",
+      "kind": "spatial_checkpoint_bundle",
+      "dataset": "cholect45",
+      "variant": "swinl224",
+      "architecture": "TripletModel",
+      "folds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "status": "published",
+      "available": true,
+      "license": "CC-BY-NC-4.0",
+      "license_status": "approved",
+      "release_tag": "spatial-encoders-v1.0.0",
+      "files": [
+        {
+          "id": "cholect45-spatial-l224-fold0",
+          "filename": "cholect45-spatial-l224-fold0.pth",
+          "format": "file",
+          "install_path": "cholect45/l224/fold0.pth",
+          "fold": 0,
+          "url": "https://github.com/yongyong98/CurConMix-TMI/releases/download/spatial-encoders-v1.0.0/cholect45-spatial-l224-fold0.pth",
+          "sha256": "a3de0b81a16e0108264b8fbc11268fb3bce15acb98cdd40e3a746e5cdef63399",
+          "size_bytes": 780925604,
+          "source_sha256": "8c1e78e14908f8f887023fadb3e624a192507c573bc237fcc375ea129740f958",
+          "canonical_prediction_sha256": "9fd0aa851627b90f2f5cba34b680eaeab3d91dba912660294cc74221cdbcbdde",
+          "mapping_sha256": "076a862728566ccd641e2f21bcc5f18e9e020c74a9bf54d8cbdb51639c14e67e"
+        },
+        {
+          "id": "cholect45-spatial-l224-fold1",
+          "filename": "cholect45-spatial-l224-fold1.pth",
+          "format": "file",
+          "install_path": "cholect45/l224/fold1.pth",
+          "fold": 1,
+          "url": "https://github.com/yongyong98/CurConMix-TMI/releases/download/spatial-encoders-v1.0.0/cholect45-spatial-l224-fold1.pth",
+          "sha256": "9f71d0380cff6812bbe2f12fb605beee3c89280bf5a29c88073a61e62abaeaf1",
+          "size_bytes": 780925604,
+          "source_sha256": "8169baf8d6d444e96c523a94a52111f5aae99d750dd89ea9033a9bef5f78a0ac",
+          "canonical_prediction_sha256": "9fd0aa851627b90f2f5cba34b680eaeab3d91dba912660294cc74221cdbcbdde",
+          "mapping_sha256": "076a862728566ccd641e2f21bcc5f18e9e020c74a9bf54d8cbdb51639c14e67e"
+        },
+        {
+          "id": "cholect45-spatial-l224-fold2",
+          "filename": "cholect45-spatial-l224-fold2.pth",
+          "format": "file",
+          "install_path": "cholect45/l224/fold2.pth",
+          "fold": 2,
+          "url": "https://github.com/yongyong98/CurConMix-TMI/releases/download/spatial-encoders-v1.0.0/cholect45-spatial-l224-fold2.pth",
+          "sha256": "4b8968b9a8849ddf034199d55b9cf5b1367a2b539b44e2637bf7bcc8165037e0",
+          "size_bytes": 780925604,
+          "source_sha256": "7cce435b830a0a034b6ac125944e224872b1c9f27e27b06e11910882b1460f35",
+          "canonical_prediction_sha256": "9fd0aa851627b90f2f5cba34b680eaeab3d91dba912660294cc74221cdbcbdde",
+          "mapping_sha256": "076a862728566ccd641e2f21bcc5f18e9e020c74a9bf54d8cbdb51639c14e67e"
+        },
+        {
+          "id": "cholect45-spatial-l224-fold3",
+          "filename": "cholect45-spatial-l224-fold3.pth",
+          "format": "file",
+          "install_path": "cholect45/l224/fold3.pth",
+          "fold": 3,
+          "url": "https://github.com/yongyong98/CurConMix-TMI/releases/download/spatial-encoders-v1.0.0/cholect45-spatial-l224-fold3.pth",
+          "sha256": "552b1498f321c8496fdd0535f22e6255500578cc57de083b9321b877728386fc",
+          "size_bytes": 780925604,
+          "source_sha256": "6189d7f4ac45fb9fbdaf9eb1481719c12dded097fbf0cc5234fabee77da49ddc",
+          "canonical_prediction_sha256": "9fd0aa851627b90f2f5cba34b680eaeab3d91dba912660294cc74221cdbcbdde",
+          "mapping_sha256": "076a862728566ccd641e2f21bcc5f18e9e020c74a9bf54d8cbdb51639c14e67e"
+        },
+        {
+          "id": "cholect45-spatial-l224-fold4",
+          "filename": "cholect45-spatial-l224-fold4.pth",
+          "format": "file",
+          "install_path": "cholect45/l224/fold4.pth",
+          "fold": 4,
+          "url": "https://github.com/yongyong98/CurConMix-TMI/releases/download/spatial-encoders-v1.0.0/cholect45-spatial-l224-fold4.pth",
+          "sha256": "f410f93776938c6765f5476020519267956eaa320bb50c50fb1dfc739dc25a46",
+          "size_bytes": 780925604,
+          "source_sha256": "93c552c3e1a704a4c394cd014f6974d31d3626cc6d07f110349bb1fa4de888ab",
+          "canonical_prediction_sha256": "9fd0aa851627b90f2f5cba34b680eaeab3d91dba912660294cc74221cdbcbdde",
+          "mapping_sha256": "076a862728566ccd641e2f21bcc5f18e9e020c74a9bf54d8cbdb51639c14e67e"
+        }
+      ],
+      "validation": {
+        "tensor_equality": "PASS",
+        "strict_model_load": "PASS",
+        "prediction_pairing": "EXACT_FLOAT32",
+        "source_preserved": true,
+        "export_sha256": "recomputed"
+      },
+      "release_note": "Five spatial student checkpoints with unchanged model tensors, strict architecture loading, and exact float32 pairing to stored canonical predictions. Export preparation performs no new inference. Matching feature extraction and MRTT inputs require separate qualification."
+    }
+  ],
+  "checksums": {
+    "filename": "spatial_sha256sums.txt",
+    "url": "https://github.com/yongyong98/CurConMix-TMI/releases/download/spatial-encoders-v1.0.0/spatial_sha256sums.txt",
+    "sha256": "4028b0e4fb0df1a374dc46fc9ab4c42d7e9d21b72e58ff36692afcf2221e6689",
+    "size_bytes": 1445,
+    "scope": "Fifteen spatial checkpoint files only; excludes this checksum file."
+  }
+}

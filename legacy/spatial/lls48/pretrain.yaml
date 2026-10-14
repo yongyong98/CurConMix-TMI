@@ -1,0 +1,14 @@
+defaults:
+  - config
+  - _self_
+
+# Historical LLS48 B224 stage settings, not a new reproduction result.
+epochs: 7
+ssl: true
+method: curriculum_supcon
+ssl_loss: supcon
+feature_batch: true
+feature_mixup: true
+alpha: 0.4
+label_order: [t, it, ivt]
+exp: CurConMix_B224_Pretrain

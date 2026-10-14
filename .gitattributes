@@ -1,0 +1,8 @@
+* text=auto eol=lf
+*.py text eol=lf
+*.json text eol=lf
+*.yaml text eol=lf
+*.md text eol=lf
+# Checkpoint metadata hashes these mapping files byte-for-byte.
+src/curconmix_repro/temporal/ivtmetrics_cholec/maps.txt -text !eol whitespace=cr-at-eol
+src/curconmix_repro/temporal/ivtmetrics_lls/maps.txt -text !eol

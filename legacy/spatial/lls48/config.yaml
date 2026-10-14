@@ -1,0 +1,174 @@
+# Portable B224 configuration. See docs/spatial.md before running.
+# Paths to read and save data
+parent_path: ???
+# path_csv: dataframe/lls48_clip_uniform_5frames.csv
+path_csv: dataframe/LLS48_TRI195.csv ## null triplet은 뒤로 밀어넣음
+train_path: data/
+output_dir: ???
+training_split: null  # Required explicit nested procedure split for all new training stages.
+
+# General Settings
+debug: false
+device: cuda:0
+
+# Hyperparameter
+exp: myexp
+teacher_exp: myexp
+pretrained_exp : myexp
+nworkers: 4 # change this
+
+# Data split
+challenge_split: False ## True면 LLS48_challenge_split.csv 사용
+n_fold : 5
+start_n_fold: 0
+trn_fold:
+- 0
+- 1
+- 2
+- 3
+- 4
+
+step_dom : 1
+step_min : 1
+
+# Target column param
+col0: tri0
+target_size: 266
+triplet_size : 195
+target_col : multi_tri
+multi: true
+fut: 0_fut
+
+# Model hyperparams
+model_name: swin_base_patch4_window7_224
+pretrained: true
+weight_dir :
+local_weight : false
+
+# Augmentation params
+height: 224
+width: 224
+
+# Training params
+epochs: ???  # Select a stage config; no implicit one-epoch experiment.
+T_0: 21  # CosineAnnealingWarmRestarts
+lr: 2e-4
+min_lr: 2e-5 #2e-7   30e ->   2e-4(1) -> 2e-5(30)  90 2e-7
+batch_size: 64
+valid_batch_size: 64
+weight_decay: 1e-6
+seed: 142
+
+# Self-distillation
+SD: 1
+distill : False
+
+# Label smoothing
+smooth : false
+ls : 0.1
+
+# Drop noisy frames
+drop_all: False
+drop_black: False
+filter_black: true
+
+# Leave out an independent test set of 5 videos
+test_inference: false
+
+# Inference
+inference : true
+ensemble : False
+ensemble_models :
+ensemble_avg : True
+
+# Neptune logging
+neplog: false
+neptune_project:
+neptune_api_token:
+wandb_log: false
+wandb_project: CurConMix
+wandb_entity:
+wandb_group:
+wandb_tags: []
+wandb_mode: auto
+wandb_dir:
+
+gradient_accumulation_steps: 2
+max_grad_norm: 1000
+
+cutout: False
+base_aug: True
+train_val: False # during training we check training CmAP performance if True
+loss: 'bce'
+optim: 'adamw'
+pretrained_ssl: False
+split_selector: 'LLS48'
+
+temp: 0.1
+ssl: False
+label_order : ['t', 'it', 'ivt'] # i, v,t, it, iv, tv, ivt
+label_order_list : ['target', 'inst_target', 'triplet']
+# when curriculum is False the last value in the label_order is the label to be used for the loss
+ssl_loss : 'supcon'
+method: 'supcon'
+
+freeze: False
+class_weights: False
+drop_rate: 0.0
+shuffle: True
+symmetric: True
+positive_pairs: 'instrument' # target instrument verb inst_target triplet inst_verb target_verb video
+auxillary: False # 'num','triplet', 'inst', 'verb', 'target',
+auxillary_cls: False
+use_phase: False
+curriculum: False
+ref_loss_weight: 4
+center: False
+student_temp: 0.1
+teacher_temp: 0.04
+use_KoLeo: False
+num_classes_K: 65336
+multi_crops: 1 # for each image
+bn: True
+imbalance: False
+
+## Supcon Loss hyperparameter
+contrast_mode: 'one'
+auxiliary_weight: 1
+
+mixup : False
+alpha: 0.4
+feature_file_name : 'trainset_features_threshold_10.pkl'
+cos_sim_matrix_file_name : 'similarity_matrix.pkl'
+feature_dir: null
+model_tag: SwinB224
+
+feature_batch : False
+feature_mixup : False ## Feature mixup to make difficult synthesize negative samples
+save_all_ssl_epochs: False
+num_negative_samples : 63
+Base384 : False
+tiny_model : False
+base_model : False
+large_model : False
+swinv2_large : False
+top_n : 1024
+
+evaluate_all : False
+ignore_null: true
+
+save_summary_csv: False ## 실험 끝나고 요약본 csv로 저장
+summary_filename: "evaluate_all_summary.csv"
+force_recompute: false
+save_classwise_ap: false
+ensemble_only : false
+
+hydra:
+  run:
+    dir: .
+  output_subdir: null
+  job:
+    chdir: false
+
+# Required only by the unsupported historical cross-dataset linear probe.
+cholec_pretrained_output_dir: ???

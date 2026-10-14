@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "dataset": "lls48",
+  "model_type": "mr2",
+  "model_name": "swin_bas_266_LLS48_SwinB384_Curriculum_Feature_Mixup_e7_Student",
+  "experiment_suffix": "LLS48_mr2_Base384_Student_ks456_lr30e4_fusion_snorm_ksweight",
+  "dim": 1024,
+  "num_classes": 266,
+  "triplet_size": 195,
+  "ks": [
+    4,
+    5,
+    6
+  ],
+  "fusion": "learned",
+  "use_spatial_norm": true,
+  "spatial_dropout": 0.1,
+  "ks_weights": true,
+  "temporal_cfg": {
+    "nhead": 4,
+    "num_layers": 3,
+    "dim_feedforward": 2048,
+    "dropout": 0.1
+  },
+  "epochs": 30,
+  "batch_size": 1,
+  "learning_rate": 0.0003,
+  "optimizer": "AdamW",
+  "weight_decay": 0.01,
+  "special_lr_multiplier": 1,
+  "scheduler": {
+    "name": "StepLR",
+    "step_size": 30,
+    "gamma": 0.5
+  },
+  "seed": 42,
+  "num_workers": 0,
+  "n_fold": 5,
+  "ignore_null": true,
+  "sd_ddof": 0,
+  "validation_videos": [
+    [
+      "VID10",
+      "VID15",
+      "VID22",
+      "VID27",
+      "VID30",
+      "VID39",
+      "VID42",
+      "VID46",
+      "VID47"
+    ],
+    [
+      "VID04",
+      "VID06",
+      "VID07",
+      "VID08",
+      "VID18",
+      "VID29",
+      "VID32",
+      "VID36",
+      "VID37",
+      "VID43"
+    ],
+    [
+      "VID02",
+      "VID05",
+      "VID13",
+      "VID16",
+      "VID19",
+      "VID24",
+      "VID28",
+      "VID31",
+      "VID45"
+    ],
+    [
+      "VID01",
+      "VID03",
+      "VID20",
+      "VID23",
+      "VID26",
+      "VID35",
+      "VID38",
+      "VID40",
+      "VID44",
+      "VID48"
+    ],
+    [
+      "VID09",
+      "VID11",
+      "VID12",
+      "VID14",
+      "VID17",
+      "VID21",
+      "VID25",
+      "VID33",
+      "VID34",
+      "VID41"
+    ]
+  ]
+}

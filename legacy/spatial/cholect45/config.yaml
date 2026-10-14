@@ -1,0 +1,136 @@
+# Portable B224 configuration. See docs/spatial.md before running.
+# Paths to read and save data
+parent_path: ???
+path_csv: dataframes/CholecT50.csv
+train_path: data/
+output_dir: ???
+training_split: null  # Required explicit nested procedure split for all new training stages.
+
+phase : false
+cholec80_phase_path : phase_annotations
+
+# General Settings
+debug: false
+device: cuda:0
+
+# Hyperparameter
+exp: myexp
+teacher_exp: myexp
+pretrained_exp : myexp
+nworkers: 4 # change this
+
+# Data split
+n_fold : 5
+start_n_fold: 0
+trn_fold:
+- 0
+- 1
+- 2
+- 3
+- 4
+
+# Target column param
+col0: tri0
+target_size: 131
+triplet_size : 100
+multi: true
+
+# Model hyperparams
+model_name: swin_base_patch4_window7_224
+pretrained: true
+weight_dir :
+local_weight : false
+
+# Augmentation params
+height: 224
+width: 224
+
+# Training params
+epochs: ???  # Select a stage config; no implicit one-epoch experiment.
+T_0: 21  # CosineAnnealingWarmRestarts
+lr: 2e-4
+min_lr: 2e-5 #2e-7   30e ->   2e-4(1) -> 2e-5(30)  90 2e-7
+batch_size: 64
+valid_batch_size: 64
+weight_decay: 1e-6
+seed: 142
+
+# Self-distillation
+SD: 1
+distill : False
+# Label smoothing
+smooth : false
+ls : 0.1
+
+# Inference
+inference : true
+ensemble : False
+ensemble_models :
+ensemble_avg : False
+
+# Neptune logging
+neplog: false
+neptune_project:
+neptune_api_token:
+wandb_log: false
+wandb_project: CurConMix
+wandb_entity:
+wandb_group:
+wandb_tags: []
+wandb_mode: auto
+wandb_dir:
+
+gradient_accumulation_steps: 2
+
+cutout: False
+base_aug: True
+loss: 'bce'
+optim: 'adamw'
+pretrained_ssl: False
+split_selector: 'cholect45-crossval'
+
+temp: 0.1
+ssl: False
+label_order : ['t', 'it', 'ivt'] # i, v,t, it, iv, tv, ivt
+
+ssl_loss : 'supcon'
+method: 'supcon'
+
+shuffle: True
+
+## Supcon Loss hyperparameter
+contrast_mode: 'one'
+
+mixup : False
+alpha: 0.4
+feature_file_name : 'trainset_features_threshold_10.pkl'
+cos_sim_matrix_file_name : 'similarity_matrix.pkl'
+feature_dir: null
+model_tag: SwinB224
+
+feature_batch : False
+feature_mixup : False ## Feature mixup to make difficult synthesize negative samples
+save_all_ssl_epochs: False
+num_negative_samples : 63
+Base384 : False
+tiny_model : False
+base_model : False
+large_model : False
+top_n : 1024
+
+evaluate_all : False
+ignore_null: true
+
+
+save_summary_csv: False
+summary_filename: "evaluate_all_summary.csv"  # 요약 CSV 파일명(폴더 안에 저장됨)
+force_recompute: false             # true면 기존 요약에 있어도 전부 다시 계산/덮어쓰기
+save_classwise_ap: false           # 각 component별 classwise AP CSV 저장 여부(기본 false)
+ensemble_only: false
+
+hydra:
+  run:
+    dir: .
+  output_subdir: null
+  job:
+    chdir: false

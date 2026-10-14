@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "curconmix-tmi"
+version = "0.1.0.dev0"
+description = "CurConMix+ research code for hierarchical surgical workflow understanding"
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">=3.9"
+dependencies = [
+  "numpy>=1.22,<2",
+  "pandas>=1.4,<3",
+  "scikit-learn>=1.1,<1.6",
+  "tqdm>=4.64,<5",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7,<9"]
+
+[project.scripts]
+curconmix = "curconmix_repro.cli:main"
+curconmix-assets = "curconmix_release.assets:main"
+
+[tool.setuptools]
+license-files = ["LICENSE", "THIRD_PARTY_NOTICES.md", "DATA_AND_MODEL_LICENSE.md", "third_party/licenses/*.txt"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"*" = ["maps.txt"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+target-version = "py39"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E9", "F63", "F7", "F82"]

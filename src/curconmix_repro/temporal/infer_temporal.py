@@ -262,7 +262,7 @@ def _infer_fold_df_like_format(
     check_feature_shape: bool = False,
 ) -> pd.DataFrame:
     """
-    단일 fold split을 '요청 포맷'의 프레임 단위 DF로 변환.
+    Convert one fold split to a frame-level DataFrame using the dataset CSV schema.
     verbose_labels=True → 각 비디오의 label.npy 경로/shape 출력
     verbose_features=True → 각 비디오의 feature.npy 경로/shape 출력
     """

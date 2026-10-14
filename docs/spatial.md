@@ -154,9 +154,8 @@ python legacy/spatial/cholect45/run_stage.py predict --data-root /absolute/path/
 Each stage covers folds 0 through 4 using the same explicit nested split. The teacher loads fixed final pretraining epoch 2 for CholecT45 or epoch 6 for LLS48, using zero-based checkpoint suffixes. The soft-label stage runs the selected teacher on that fold's `train` procedures only; it excludes both inner validation and outer test. It is a separate, necessary step. For an unchanged legacy released-checkpoint prediction workflow, omit `--training-split`; this preserves the original outer-fold inference mapping and does not certify the historical training protocol.
 
 Evaluate saved best-student outer-test predictions separately with the public
-six-component AP entry point. Training no longer combines predictions across
-epochs into a `final_cv_cmAP` report. The training log describes inner-validation
-selection, not a final outer-test result.
+six-component AP entry point. Training logs describe inner-validation checkpoint
+selection, not final outer-test results.
 
 Use a new output directory for each run, shared across that run's stages. New training refuses existing stage checkpoints, and soft-label generation refuses existing soft-label outputs; an interrupted run is not silently resumed. Keep final prediction destinations separate from prior results as well. Outputs include `checkpoints/` with provenance sidecars, `softlabels/` with provenance sidecars, `predictions/`, and training summaries. The packaged experiment names are `CurConMix_B224_Pretrain`, `CurConMix_B224_Teacher`, and `CurConMix_B224_Student`; they are names for new runs, not aliases that authenticate a released checkpoint.
 

@@ -22,7 +22,7 @@ Checks performed during release preparation on 2026-10-12:
 | --- | --- | --- |
 | CPU tests with synthetic fixtures | Current suite covers download, training serialization, order/fold checks, keyed features and cache preflight; see latest CI for the exact result | Published model performance |
 | Python syntax compilation | Passed for packaged source | Runtime compatibility of every training dependency |
-| Ruff error checks | Full `src`, `legacy`, `tools`, `tests` scope checked; the missing legacy ensemble naming helper is restored without changing AP | Complete style or scientific review |
+| Ruff error checks | Passed for `src`, `legacy`, `tools`, and `tests` | Complete style or scientific review |
 | Staged whitespace check | Passed | Full supply-chain certification |
 | Editable package installation | Passed; both command entry points work | Clean-machine dependency installation |
 | Wheel build and license contents | Passed; MIT, BSD notices, and asset terms included | Standalone wheel data or model availability |
@@ -74,9 +74,7 @@ compare original image identities or execute a model.
 The new tests cover multipart download/install, interrupted-part reuse, wrong
 hashes, collisions, unsafe paths, symlinks, ZIP expansion limits, checkpoint export
 metadata, release-manifest derivation, and canonical dataset structure. Tests use
-synthetic fixtures, not clinical images or trained weights. On this Windows host,
-the default pytest temporary directory was inaccessible; a dedicated ignored
-test directory was used without changing system permissions.
+synthetic fixtures, not clinical images or trained weights.
 
 The usability changes also test the newly added workflow with synthetic arrays
 and mocked model/image calls. No training, optimizer step or forward pass is

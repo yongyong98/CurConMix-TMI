@@ -20,17 +20,17 @@ if hasattr(sys.stdout, "reconfigure"):
 if hasattr(sys.stderr, "reconfigure"):
     sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 
-# 기존 유지: 마스크 미적용 BCE (요청: 1~2 미적용)
+# BCE is computed without an additional mask.
 loss_layer = nn.BCEWithLogitsLoss()
 
 
 def base_test(mode, model, test_loader, device, description="Validating"):
     """
-    mAP 평가 수행 + (검증 시) 가중치 1회 로깅.
-    적용 변경(3~5):
-      - [3] squeeze() 제거 → 명시적 reshape(-1, K)
-      - [4] video 이름을 프레임 단위로 정확히 전개 (batch 대응)
-      - [5] 중복 forward 제거(로깅과 손실/예측에 동일 outputs/parts 재사용)
+    Evaluate mAP and log fusion weights once during validation.
+
+    Flatten predictions and labels to frame rows, preserving the class axis and
+    repeating each video name for its frames. Reuse each batch's model output
+    for loss, predictions, and optional weight logging.
     """
     model.eval()
     all_preds, all_labels, all_videos = [], [], []
@@ -42,7 +42,7 @@ def base_test(mode, model, test_loader, device, description="Validating"):
             labels_tensor = torch.as_tensor(labels, dtype=torch.float32)
             video, labels_tensor = video.to(device), labels_tensor.to(device)
 
-            # [5] 한 번만 forward해서 parts/outputs 모두 사용
+            # Reuse outputs and parts from a single forward pass.
             outputs, parts = model(video)
 
             # (검증 시) 가중치 1회 로깅
@@ -84,13 +84,12 @@ def base_test(mode, model, test_loader, device, description="Validating"):
             loss_item += loss.item() * B
             total_samples += B
 
-            # [3] squeeze() 금지 → 명시적 2D 평탄화
             # outputs/labels: [B, T, K] → [B*T, K]
             K = outputs.shape[-1]
             all_preds.append(outputs.reshape(-1, K).detach().cpu().numpy())
             all_labels.append(labels_tensor.reshape(-1, K).detach().cpu().numpy())
 
-            # [4] video 이름을 프레임 단위로 전개
+            # video 이름을 프레임 단위로 전개
             # - video_name이 리스트/튜플이면 배치 길이와 동일하다고 가정
             # - 배치 내 모든 샘플의 T가 동일하다는 가정(기존 DataLoader 사용 전제)
             #   (batch_size=1이면 항상 안전)
@@ -111,10 +110,9 @@ def base_test(mode, model, test_loader, device, description="Validating"):
     preds_list = np.concatenate(all_preds, axis=0)  # [N_frames, K]
     vid_names = sum([list(x) for x in all_videos], [])  # 평탄화
 
-    # num_classes는 모드에 따라 유지 (기존 로직)
+    # Expected output width for each dataset.
     num_classes = 131 if mode in ["cholect45", "cholect50"] else 266
 
-    # 안전 체크: 실제 K와 불일치 시 K를 신뢰할 수도 있으나, 기존 규약을 유지
     if preds_list.shape[1] != num_classes or labels_list.shape[1] != num_classes:
         # 불일치 시 경고만 출력하고, 실제 K로 컬럼 생성
         print(
@@ -136,7 +134,6 @@ def base_test(mode, model, test_loader, device, description="Validating"):
         t_cols = [f"t{i}" for i in range(15)]
         label_cols = tri_cols + inst_cols + v_cols + t_cols  # 총 131
 
-    # pred_cols = [f"{i}" for i in range(len(label_cols))]  # 기존 메트릭 호환을 유지
     pred_cols = [f"{i}" for i in range(num_classes)]
     df = pd.DataFrame(
         data=np.concatenate([labels_list, preds_list], axis=1),
@@ -175,9 +172,9 @@ def base_train(
     wandb_run=None,
 ):
     """
-    fold_num 인자를 받도록 수정된 훈련 함수.
-    적용 변경(3~5는 검증 함수에 반영됨) + 체크포인트에 model meta 저장.
-    (요청대로 1~2는 유지: 손실/마스킹 기존과 동일)
+    Train one fold and select its checkpoint using inner-validation AP.
+
+    Save model configuration and split provenance with the selected checkpoint.
     """
     split = load_training_split(getattr(args, "training_split", None), args.dataset)
     guard_training_loaders(split, fold_num, train_loader, validation_loader)
@@ -189,7 +186,7 @@ def base_train(
 
     best_epoch, best_map = 0, -float("inf")
 
-    # 특수 파라미터 LR 분리 (기존 유지)
+    # Separate learning rates for fusion and kernel-weight parameters.
     special_params, base_params = [], []
     for name, param in model.named_parameters():
         if "fusion_logit" in name or "ks_logits" in name:
@@ -275,8 +272,7 @@ def base_train(
                 best_epoch = epoch
                 checkpoint_filename = f"best_model_fold{fold_num}.pth"
 
-                # --- 모델 메타 포함 저장 (요청 추가) ---
-                # 가능한 메타(모델/실험 설정) 최대한 담기
+                # Record model configuration and training provenance.
                 meta = {
                     **checkpoint_provenance(split, fold_num, stage="mrtt"),
                     "model_type": getattr(args, "model_type", None),

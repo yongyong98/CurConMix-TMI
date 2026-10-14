@@ -210,8 +210,7 @@ before importing the training implementation. New cache generation requires a
 new directory; stage outputs share the same run directory across their sequence.
 The final student outer-test prediction and evaluation are separate from the
 training summary. New spatial training selects teacher and student checkpoints
-only on inner-validation AP_IVT and no longer aggregates predictions across
-epochs into a `final_cv_cmAP` report. Its selection logs must not be presented as
+only on inner-validation AP_IVT. Its selection logs must not be presented as
 the best saved student's final outer-test AP or reproduced paper performance.
 
 The historical optimizer, sampler and scheduler behavior is retained. In
